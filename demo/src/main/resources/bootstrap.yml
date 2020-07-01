@@ -1,0 +1,75 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: my-server
+
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://42.51.1.30:3308/rrk-dev-user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+      username: root
+      password: wpx120516
+      #最大连接数
+      maxActive: 30
+      #最小连接数
+      minIdle: 5
+      #获取连接的最大等待时间
+      maxWait: 10000
+      #解决mysql8小时的问题
+      #空闲连接的检查时间间隔
+      timeBetweenEvictionRunsMillis: 60000
+      #空闲连接最小空闲时间
+      minEvictableIdleTimeMillis: 300000
+      validation-query: SELECT 'X'
+
+
+  rabbitmq:
+    host: local.rabbitmq.com
+    port: 5672
+    username: cloud-dev
+    password: cloud-dev
+    virtual-host: /
+  redis:
+    host: local.redis.com
+    port: 6379
+    password: wpx120516
+    timeout: 10s
+    lettuce:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1ms
+  mvc:
+    servlet:
+      load-on-startup: 1
+  aop:
+    proxy-target-class: true
+
+#mybaits-plus配置，修改主键类型，mapper.xml、type 别名等
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 1
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: false
+    # 逻辑删除字段
+    logic-delete-value: 1
+    logic-not-delete-value: 0
+    #自定义SQL注入器
+    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+
+logging:
+  level:
+    root: info
+    com.hap: debug
+  file: logs/${spring.application.name}.log
