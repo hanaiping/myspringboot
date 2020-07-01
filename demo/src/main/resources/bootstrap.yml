@@ -4,6 +4,7 @@ spring:
   application:
     name: my-server
 
+
   datasource:
     druid:
       driver-class-name: com.mysql.jdbc.Driver
@@ -73,3 +74,14 @@ logging:
     root: info
     com.hap: debug
   file: logs/${spring.application.name}.log
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    instance-id: ${spring.application.name}:${random.int}
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      registry-fetch-interval-seconds: 5

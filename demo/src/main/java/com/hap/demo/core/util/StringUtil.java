@@ -1,5 +1,4 @@
 package com.hap.demo.core.util;
-import org.apache.commons.lang.StringUtils;
 
 import java.io.Reader;
 import java.sql.Clob;
@@ -234,7 +233,7 @@ public class StringUtil {
      * @author jiqinlin
      */
     public final static boolean isMobile(String text) {
-        if (text.length() != 11){
+        if (text.length() != 11) {
             return false;
         }
 
@@ -250,13 +249,13 @@ public class StringUtil {
      * @author jiqinlin
      */
     public final static String subMobile(String text) {
-        if (text.length() != 11){
+        if (text.length() != 11) {
             return "12345678";
         }
-        if(match(text,
+        if (match(text,
                 "^((\\\\+86)|(86))?1([3,4,5,7,8,9][0-9]|4[0-9]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\\d{8}$")) {
-            return text.substring(text.length()-6);
-        }else {
+            return text.substring(text.length() - 6);
+        } else {
             return "12345678";
         }
     }
@@ -455,6 +454,7 @@ public class StringUtil {
         }
         return match(text.trim(), isOnceSQLField);
     }
+
     /**
      * 截取"#"后缀
      */
@@ -498,16 +498,17 @@ public class StringUtil {
             return str;
         }
     }
-    public static Boolean isMobileNO(String mobiles){
+
+    public static Boolean isMobileNO(String mobiles) {
         Pattern p = Pattern.compile("^((\\+86)|(86))?[1][3456789][0-9]{9}$");
         Matcher m = p.matcher(mobiles);
-        System.out.println("验证结果为"+m.matches());
+        System.out.println("验证结果为" + m.matches());
         return m.matches();
     }
 
     //去掉字符串中的空白字符，不限于空格
-    public static String removeSpaces(String str){
-        return str.replaceAll("\\s*","");
+    public static String removeSpaces(String str) {
+        return str.replaceAll("\\s*", "");
     }
   /*  public static void main(String[] args) {
         //   boolean mobileNO = StringUtil.isMobileNO("+8617314995124");
@@ -544,6 +545,7 @@ public class StringUtil {
 
     /**
      * 下划线转驼峰
+     *
      * @param str
      * @return
      */
@@ -567,6 +569,7 @@ public class StringUtil {
 
     /**
      * 驼峰转下划线,效率比上面高
+     *
      * @param str
      * @return
      */
@@ -582,6 +585,7 @@ public class StringUtil {
 
     /**
      * 驼峰转下划线(简单写法，效率低于{@link #humpToLine(String)})
+     *
      * @param str
      * @return
      */
@@ -591,11 +595,12 @@ public class StringUtil {
 
     /**
      * 首字母转小写
+     *
      * @param s
      * @return
      */
     public static String toLowerCaseFirstOne(String s) {
-        if (org.apache.commons.lang.StringUtils.isBlank(s)) {
+        if (StringUtil.isBlank(s)) {
             return s;
         }
         if (Character.isLowerCase(s.charAt(0))) {
@@ -607,11 +612,12 @@ public class StringUtil {
 
     /**
      * 首字母转大写
+     *
      * @param s
      * @return
      */
     public static String toUpperCaseFirstOne(String s) {
-        if (org.apache.commons.lang.StringUtils.isBlank(s)) {
+        if (StringUtil.isBlank(s)) {
             return s;
         }
         if (Character.isUpperCase(s.charAt(0))) {
@@ -623,6 +629,7 @@ public class StringUtil {
 
     /**
      * object转String
+     *
      * @param object
      * @return
      */
@@ -643,6 +650,7 @@ public class StringUtil {
 
     /**
      * object转Integer
+     *
      * @param object
      * @return
      */
@@ -663,6 +671,7 @@ public class StringUtil {
 
     /**
      * object转Boolean
+     *
      * @param object
      * @return
      */
@@ -682,16 +691,15 @@ public class StringUtil {
     }
 
 
-
-
     public final static boolean isNull(Object[] objs) {
         if (objs == null || objs.length == 0) {
             return true;
         }
         return false;
     }
+
     public final static boolean isNull(Object obj) {
-        if (obj == null || isNull(obj.toString())){
+        if (obj == null || isNull(obj.toString())) {
             return true;
         }
         return false;
@@ -753,12 +761,13 @@ public class StringUtil {
     public final static boolean isNotNull(Object[] objs) {
         return !isNull(objs);
     }
+
     public final static boolean isNotNull(Object obj) {
         return !isNull(obj);
     }
 
-    public static boolean isNullOrTrimEmptyString(String str){
-        return null == str || str.trim().length()==0;
+    public static boolean isNullOrTrimEmptyString(String str) {
+        return null == str || str.trim().length() == 0;
     }
 
     public static boolean isEmptyString(String str) {
@@ -768,8 +777,7 @@ public class StringUtil {
     /**
      * 过滤html代码
      *
-     * @param inputString
-     *            含html标签的字符串
+     * @param inputString 含html标签的字符串
      * @return
      */
     public static String htmlFilter(String inputString) {
@@ -819,15 +827,13 @@ public class StringUtil {
     /**
      * 正则表达式匹配
      *
-     * @param text
-     *            待匹配的文本
-     * @param reg
-     *            正则表达式
+     * @param text 待匹配的文本
+     * @param reg  正则表达式
      * @return
      * @author jiqinlin
      */
     private final static boolean match(String text, String reg) {
-        if (org.apache.commons.lang.StringUtils.isBlank(text) || org.apache.commons.lang.StringUtils.isBlank(reg)) {
+        if (StringUtil.isBlank(text) || StringUtil.isBlank(reg)) {
             return false;
         }
         return Pattern.compile(reg).matcher(text).matches();
@@ -836,8 +842,7 @@ public class StringUtil {
     /**
      * 将String转成Clob ,静态方法
      *
-     * @param str
-     *            字段
+     * @param str 字段
      * @return clob对象，如果出现错误，返回 null
      */
     public static Clob stringToClob(String str) {
@@ -857,8 +862,7 @@ public class StringUtil {
     /**
      * 将Clob转成String ,静态方法
      *
-     * @param clob
-     *            字段
+     * @param clob 字段
      * @return 内容字串，如果出现错误，返回 null
      */
     public static String clobToString(Clob clob) {
@@ -884,9 +888,9 @@ public class StringUtil {
             } catch (Exception e) {
             }
         }
-        if (sb == null){
+        if (sb == null) {
             return null;
-        } else{
+        } else {
             return sb.toString();
         }
 
@@ -895,8 +899,7 @@ public class StringUtil {
     /**
      * 将字符串转换为utf-8
      *
-     * @param str
-     *            字符串
+     * @param str 字符串
      * @return
      */
     public static String stringToUtf(String str) {
@@ -931,6 +934,7 @@ public class StringUtil {
 
     /**
      * 将字符串转换为16进制字符串
+     *
      * @param s
      * @return
      */
@@ -943,8 +947,10 @@ public class StringUtil {
         }
         return str;
     }
+
     /**
      * 将16进制字符串转换成普通字符串
+     *
      * @param s
      * @return
      */
@@ -968,6 +974,7 @@ public class StringUtil {
 
     /**
      * list转换为字符串 并加入分隔字符
+     *
      * @param list
      * @param separator
      * @return
@@ -977,11 +984,12 @@ public class StringUtil {
         for (int i = 0; i < list.size(); i++) {
             sb.append(list.get(i)).append(separator);
         }
-        return sb.toString().substring(0,sb.toString().length()-1);
+        return sb.toString().substring(0, sb.toString().length() - 1);
     }
 
     /**
      * String根据指定的分隔符， 转为List<String>
+     *
      * @param str
      * @param separator
      * @return
@@ -993,7 +1001,7 @@ public class StringUtil {
         List<String> list = new ArrayList<String>();
         int offset = 0;
         int start = 0;
-        while((offset = sb.indexOf(separator, offset)) != -1){
+        while ((offset = sb.indexOf(separator, offset)) != -1) {
             list.add(str.substring(start, offset));
             start = offset + separator.length();
             offset = offset + separator.length();
@@ -1001,8 +1009,10 @@ public class StringUtil {
         list.add(sb.substring(start));
         return list;
     }
+
     /**
      * 字符串转set集合
+     *
      * @param str
      * @param separator
      * @return
@@ -1013,7 +1023,7 @@ public class StringUtil {
         Set<String> set = new HashSet<String>();
         int offset = 0;
         int start = 0;
-        while((offset = sb.indexOf(separator, offset)) != -1){
+        while ((offset = sb.indexOf(separator, offset)) != -1) {
             set.add(str.substring(start, offset));
             start = offset + separator.length();
             offset = offset + separator.length();
@@ -1024,7 +1034,8 @@ public class StringUtil {
 
     /**
      * set转换为字符串 并加入分隔字符
-     *  list
+     * list
+     *
      * @param separator
      * @return
      */
@@ -1033,17 +1044,18 @@ public class StringUtil {
         for (String item : set) {
             sb.append(item).append(separator);
         }
-        return sb.toString().substring(0,sb.toString().length()-1);
+        return sb.toString().substring(0, sb.toString().length() - 1);
     }
 
     /**
      * 去除字符串中相同的字段
+     *
      * @param separator
      * @return
      */
-    public static String distinctStringByString(String str,String separator){
+    public static String distinctStringByString(String str, String separator) {
         List<String> codeList = new LinkedList<String>();
-        codeList=stringToList(str,separator);
+        codeList = stringToList(str, separator);
         List<String> listWithoutDup = new ArrayList<String>(new HashSet<String>(codeList));
         return listToString(listWithoutDup, separator);
     }
@@ -1052,19 +1064,19 @@ public class StringUtil {
      * 将时间转化成距离当前时间多少
      * 时间（刚刚、？分钟前、？小时前、？天前）
      * T≤5分钟，显示为：刚刚
-     30分钟＜T＜1小时，显示为：？分钟前
-     1小时≤T＜1天，显示为：？小时前
-     T≥1天是，显示为：？天前
+     * 30分钟＜T＜1小时，显示为：？分钟前
+     * 1小时≤T＜1天，显示为：？小时前
+     * T≥1天是，显示为：？天前
      */
-    public static String dateFormatterString(Date date){
+    public static String dateFormatterString(Date date) {
         String returnString = "";
-        if(StringUtil.isNull(date)){
+        if (StringUtil.isNull(date)) {
             return null;
-        }else{
-            long delta  =System.currentTimeMillis() - date.getTime();
-            if (delta < 1L * ONE_MINUTE *30) {
+        } else {
+            long delta = System.currentTimeMillis() - date.getTime();
+            if (delta < 1L * ONE_MINUTE * 30) {
                 long seconds = toSeconds(delta);
-                return seconds < 0 ? "时间错误" : "刚刚" ;
+                return seconds < 0 ? "时间错误" : "刚刚";
             }
             if (delta < 30L * ONE_MINUTE) {
                 long minutes = toMinutes(delta);
@@ -1117,10 +1129,10 @@ public class StringUtil {
 
 
     //通过算法分割in
-    public static String getOracleSQLIn(String ids, String field){
-        if(StringUtil.isNull(ids)){
+    public static String getOracleSQLIn(String ids, String field) {
+        if (StringUtil.isNull(ids)) {
             return "";
-        }else{
+        } else {
             String[] idArr = ids.split(",");
             List<String> idlist = Arrays.asList(idArr);
             int count = idArr.length;
@@ -1137,50 +1149,50 @@ public class StringUtil {
                 int fromIndex = i * count;
                 int toIndex = Math.min(fromIndex + count, len);
                 String productId = StringUtil.listToString(idlist.subList(fromIndex, toIndex), "','");
-                productId = productId.substring(0, productId.length()-2);
+                productId = productId.substring(0, productId.length() - 2);
                 if (i != 0) {
                     builder.append(" or ");
                 }
                 builder.append(field).append(" in ('").append(productId).append("')");
             }
 
-            if(StringUtil.isNull(builder.toString())){
+            if (StringUtil.isNull(builder.toString())) {
                 return field + " in ('')";
-            }else{
+            } else {
                 return builder.toString();
             }
         }
     }
 
     /**
+     * @return
      * @author chengjun
      * 字符串为空时，返回 字符串
-     *
-     *  str
-     *  defaultVal
-     * @return
+     * <p>
+     * str
+     * defaultVal
      */
-    public final static String defaultVal(String val){
+    public final static String defaultVal(String val) {
         return defaultVal(val, "");
     }
 
     /**
+     * @return
      * @author chengjun
      * 字符串为空时，返回给定的默认字符串值
-     *
-     *  str
-     *  defaultVal
-     * @return
+     * <p>
+     * str
+     * defaultVal
      */
-    public final static String defaultVal(String val, String defaultVal){
-        if(val == null || "".equals(val.trim())){
+    public final static String defaultVal(String val, String defaultVal) {
+        if (val == null || "".equals(val.trim())) {
             return defaultVal;
         }
         return val;
     }
 
-    public final static String trim(String val){
-        if(val == null) {
+    public final static String trim(String val) {
+        if (val == null) {
             return EMPTY;
         }
         return val.trim();
@@ -1196,8 +1208,8 @@ public class StringUtil {
      * StringUtils.split("ab:cd:ef", ":") = ["ab", "cd", "ef"]
      * </pre>
      *
-     * @param str  需要被分割的字符串
-     * @param separatorChars  分隔符
+     * @param str            需要被分割的字符串
+     * @param separatorChars 分隔符
      * @return 分割的结果
      * @author chengjun
      */
@@ -1287,7 +1299,8 @@ public class StringUtil {
         return list.toArray(new String[list.size()]);
     }
 
-    private  final static String REG_IS_SQL_FIELD_BY_SELECT = "^[A-Za-z0-9,*_([A-Za-z0-9_]) ]+$";
+    private final static String REG_IS_SQL_FIELD_BY_SELECT = "^[A-Za-z0-9,*_([A-Za-z0-9_]) ]+$";
+
     /**
      * 判断有效的SQL查询字段值(A-Za-z0-9,*_([A-Za-z0-9_]) )
      * <pre>
@@ -1298,35 +1311,38 @@ public class StringUtil {
      *    ",a,bc,d09"         = false
      *    "a,bc,d09,"         = false
      * </pre>
+     *
      * @param text
      * @return
      * @author chengjun
      */
     public final static boolean isSQLFieldBySelect(final String text) {
-        if(text == null || EMPTY.equals(text)){
+        if (text == null || EMPTY.equals(text)) {
             return false;
         }
 
 
         String str = text.trim();
 
-        if(!StringUtil.IS_ONCE_SQL_FIELD(str.substring(0, 1))){
+        if (!StringUtil.IS_ONCE_SQL_FIELD(str.substring(0, 1))) {
             return false;
         }
 
-        System.out.println(str.substring(str.length() - 1 ));
-        if(!StringUtil.IS_ONCE_SQL_FIELD(str.substring(str.length() - 1 ))){
+        System.out.println(str.substring(str.length() - 1));
+        if (!StringUtil.IS_ONCE_SQL_FIELD(str.substring(str.length() - 1))) {
             return false;
         }
 
 
         return match(str, REG_IS_SQL_FIELD_BY_SELECT);
     }
-    private  final static String IS_ONCE_SQL_FIELD = "^[A-Za-z0-9*_]+$";
+
+    private final static String IS_ONCE_SQL_FIELD = "^[A-Za-z0-9*_]+$";
 
 
     /**
      * 生成 in或者 not in语句
+     *
      * @param data
      * @param field
      * @param flag
@@ -1334,8 +1350,8 @@ public class StringUtil {
      * @return
      */
     @SuppressWarnings("unused")
-    public static String getOracleSQLIn(String data, String field, boolean flag,String separator) {
-        return getOracleSQLIn(Arrays.asList(data.split(separator)),field,flag);
+    public static String getOracleSQLIn(String data, String field, boolean flag, String separator) {
+        return getOracleSQLIn(Arrays.asList(data.split(separator)), field, flag);
     }
 
 
@@ -1354,17 +1370,46 @@ public class StringUtil {
         for (int i = 0; i < size; i++) {
             int fromIndex = i * count;
             int toIndex = Math.min(fromIndex + count, len);
-            String productId = StringUtils.defaultIfEmpty(
-                 StringUtils.join(ids.subList(fromIndex, toIndex), "','"), "");
+            String productId = StringUtil.defaultVal(
+                    StringUtil.join(ids.subList(fromIndex, toIndex), "','"), "");
             if (i != 0) {
                 builder.append(keyWord);
             }
             builder.append(field).append(mark + "  ('").append(productId).append("')");
         }
 
-        return StringUtils.defaultIfEmpty("(" + builder.toString() + ")", " "+mark+" ('') ");
+        return StringUtil.defaultVal("(" + builder.toString() + ")", " " + mark + " ('') ");
     }
 
+    public static String join(List<?> str1, String separator) {
+        Iterator<?> iterator = str1.iterator();
+        // handle null, zero and one elements before building a buffer
+        if (iterator == null) {
+            return null;
+        }
+        if (!iterator.hasNext()) {
+            return EMPTY;
+        }
+        final Object first = iterator.next();
+        if (!iterator.hasNext()) {
+            return Objects.toString(first, "");
+        }
+        // two or more elements
+        final StringBuilder buf = new StringBuilder(256); // Java default is 16, probably too small
+        if (first != null) {
+            buf.append(first);
+        }
+        while (iterator.hasNext()) {
+            if (separator != null) {
+                buf.append(separator);
+            }
+            final Object obj = iterator.next();
+            if (obj != null) {
+                buf.append(obj);
+            }
+        }
+        return buf.toString();
+    }
 
 
     public static String getOracleSQLIn() {
@@ -1382,45 +1427,49 @@ public class StringUtil {
 
 
     /**
-     *  生成 instr 语句
+     * 生成 instr 语句
+     *
      * @param data
      * @param field
      * @param flag
      * @return
      */
-    public static String getInstr(String data, String field, boolean flag,String separator) {
+    public static String getInstr(String data, String field, boolean flag, String separator) {
         List<String> ids = Arrays.asList(data.split(separator));
         List<String> instrs = new ArrayList<String>();
         String mark = flag ? " > 0" : " =0";
         for (int i = 0; i < ids.size(); i++) {
             instrs.add("  instr(" + field + ", '" + ids.get(i) + "') " + mark);
         }
-        return StringUtils
-                .defaultIfEmpty("(" + StringUtils.join(instrs, " or ") + ")", "");
+        return StringUtil
+                .defaultVal("(" + StringUtil.join(instrs, " or ") + ")", "");
     }
 
     /**
      * 判断是一个独立的SQL字段(A-Za-z0-9*_)
+     *
      * @param text
      * @return
      * @author chengjun
      */
     public final static boolean IS_ONCE_SQL_FIELD(final String text) {
-        if(text == null || EMPTY.equals(text)) {
+        if (text == null || EMPTY.equals(text)) {
             return false;
         }
         return match(text.trim(), IS_ONCE_SQL_FIELD);
     }
 
-    private  final static String REG_IS_ENGLISH_OR_NUMERIC = "^[A-Za-z0-9]+$";
+    private final static String REG_IS_ENGLISH_OR_NUMERIC = "^[A-Za-z0-9]+$";
+
     /**
      * 判断是英文或数字(A-Za-z0-9,*)
+     *
      * @param text
      * @return
      * @author chengjun
      */
     public final static boolean isEnglishOrNumeric(final String text) {
-        if(text == null || EMPTY.equals(text)) {
+        if (text == null || EMPTY.equals(text)) {
             return false;
         }
         return match(text.trim(), REG_IS_ENGLISH_OR_NUMERIC);
@@ -1428,6 +1477,7 @@ public class StringUtil {
 
     /**
      * 转驼峰命名
+     *
      * @param name
      * @return
      */
@@ -1443,7 +1493,7 @@ public class StringUtil {
         }
         // 用下划线将原始字符串分割
         String[] camels = name.split("_");
-        for (String camel :  camels) {
+        for (String camel : camels) {
             // 跳过原始字符串中开头、结尾的下换线或双重下划线
             if (camel.isEmpty()) {
                 continue;
@@ -1460,79 +1510,85 @@ public class StringUtil {
         }
         return result.toString();
     }
+
     /**
      * 处理删除前缀
+     *
      * @param val
      * @param prefix
      * @return
      */
-    public static String Handleprefix(String val,String prefix,boolean addFlag){
-        if(addFlag){
-            return val.indexOf(prefix) > -1 ? val:prefix+val;
-        }else{
-            return val.indexOf(prefix) > -1 ? val.replaceFirst(prefix, ""):val;
+    public static String Handleprefix(String val, String prefix, boolean addFlag) {
+        if (addFlag) {
+            return val.indexOf(prefix) > -1 ? val : prefix + val;
+        } else {
+            return val.indexOf(prefix) > -1 ? val.replaceFirst(prefix, "") : val;
         }
     }
 
     /**
      * 处理前缀
+     *
      * @param val
      * @param prefix
      * @return
      */
-    public static String Handleprefix(String val,String prefix){
-        return Handleprefix(val,prefix,true);
+    public static String Handleprefix(String val, String prefix) {
+        return Handleprefix(val, prefix, true);
     }
 
 
     /**
      * 辽符串加 *
+     *
      * @param str
      * @return
      */
-    public static String strmd(String str){
-        int len=str.length();
-        int m=len/2;
-        char[] c= str.toCharArray();
-        char[] c2=new char[c.length];
-        for(int i=0;i<len;i++){
-            if(i>=3 & i<3+m){
-                c2[i]='*';
-            }else{
-                c2[i]=c[i];
+    public static String strmd(String str) {
+        int len = str.length();
+        int m = len / 2;
+        char[] c = str.toCharArray();
+        char[] c2 = new char[c.length];
+        for (int i = 0; i < len; i++) {
+            if (i >= 3 & i < 3 + m) {
+                c2[i] = '*';
+            } else {
+                c2[i] = c[i];
             }
         }
         return String.valueOf(c2);
     }
+
     /**
      * 账号隐藏
+     *
      * @param str
      * @return
      */
     public static String strAccount(String str) {
-        if(isEmail(str)) {
-            return str.replaceAll("(\\w?)(\\w+)(\\w)(@\\w+\\.[a-z]+(\\.[a-z]+)?)","$1****$3$4");
-        }else if(isPhone(str)) {
+        if (isEmail(str)) {
+            return str.replaceAll("(\\w?)(\\w+)(\\w)(@\\w+\\.[a-z]+(\\.[a-z]+)?)", "$1****$3$4");
+        } else if (isPhone(str)) {
             return str.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
-        }else if(isIdCardNo(str)) {
-            return str.replaceAll("(\\d{4})\\d{10}(\\w{4})","$1*****$2");
-        }else {
+        } else if (isIdCardNo(str)) {
+            return str.replaceAll("(\\d{4})\\d{10}(\\w{4})", "$1*****$2");
+        } else {
             return str;
         }
     }
 
-    public static String subsr(String str,int len){
-        if(StringUtil.isNull(str)) {
+    public static String subsr(String str, int len) {
+        if (StringUtil.isNull(str)) {
             return null;
         }
-        if(str.length()<len){
-            if(str.length()>6){
-                return    str.substring(str.length()-6,str.length());
-            }else{
+        if (str.length() < len) {
+            if (str.length() > 6) {
+                return str.substring(str.length() - 6, str.length());
+            } else {
                 return str;
             }
-        }else{
-            return str.substring(str.length()-len,str.length());
+        } else {
+            return str.substring(str.length() - len, str.length());
         }
 
     }
